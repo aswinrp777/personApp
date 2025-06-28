@@ -11,12 +11,12 @@ function Home() {
   const [users,setUsers] = useState([]);
   //using usseEffect to load data in the biginning
   useEffect(() => {
-    axios.get('https://dummyjson.com/users').then((res)=>{
-      setUsers(res.data.users);
+    axios.get('http://localhost:3000/users').then((res)=>{
+      setUsers(res.data);
     }).catch((error)=>{
       console.log("Error while fetching the data")
     })
-  }, []);
+  }, [])
 
   return (
     <TableContainer component={Paper}>
@@ -30,17 +30,17 @@ function Home() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((user) => (
+          {users.map((users) => (
             <TableRow
-              key={user.id}
+              key={users.userId}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {user.id}
+                {users.userId}
               </TableCell>
-              <TableCell align="right">{user.firstName}</TableCell>
-              <TableCell align="right">{user.email}</TableCell>
-              <TableCell align="right">{user.phone}</TableCell>
+              <TableCell align="right">{users.userName}</TableCell>
+              <TableCell align="right">{users.email}</TableCell>
+              <TableCell align="right">{users.phone}</TableCell>
             </TableRow>
           ))}
         </TableBody>
